@@ -46,6 +46,21 @@ async function init() {
 }
 
 module.exports = async (req, res) => {
-  await init();
-  return app(req, res);
+  try {
+    await init();
+    return app(req, res);
+  } catch (err) {
+    const message = err && err.message ? String(err.message) : 'Server init failed';
+    const hasMongoUri = Boolean(process.env.MONGODB_URI);
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(
+      JSON.stringify({
+        error: message,
+        hint: hasMongoUri
+          ? 'MongoDB connection failed. In Atlas, allow Network Access for your deployment (or add 0.0.0.0/0 temporarily) and confirm the user has DB access.'
+          : 'MONGODB_URI is missing on Vercel. Add it in Project Settings → Environment Variables, then redeploy.',
+      })
+    );
+  }
 };
