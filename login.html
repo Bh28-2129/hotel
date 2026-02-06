@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Management - Login</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a class="brand" href="login.html" aria-label="Login">
+          <div class="brand-badge" aria-hidden="true"></div>
+          <div>
+            <div class="brand-title">Hotel Management</div>
+            <div style="color: rgba(255,255,255,.56); font-size: 12px; margin-top: 1px;">Login</div>
+          </div>
+        </a>
+
+        <nav class="navitems" aria-label="Primary">
+          <a class="navlink" href="signup.html">Sign up</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="container">
+        <section class="panel section" aria-label="Login form" style="max-width: 560px; margin: 0 auto;">
+          <h1 class="section-title" style="margin-bottom: 6px;">Welcome back</h1>
+          <div class="rating-note" style="margin-bottom: 14px;">Login to continue to the dashboard.</div>
+
+          <form id="loginForm">
+            <div class="grid-2">
+              <label class="field compact" style="min-width: auto;">
+                <span class="field-label">Email</span>
+                <input class="input" id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com" required />
+              </label>
+              <label class="field compact" style="min-width: auto;">
+                <span class="field-label">Password</span>
+                <input class="input" id="loginPassword" type="password" autocomplete="current-password" placeholder="••••" required />
+              </label>
+            </div>
+
+            <div id="authMsg" class="notice" style="margin-top: 12px;"></div>
+
+            <div style="margin-top: 14px; display:flex; gap: 12px; flex-wrap: wrap;">
+              <button class="btn btn-primary" type="submit">Login</button>
+              <a class="btn btn-secondary" href="signup.html">Create account</a>
+            </div>
+          </form>
+        </section>
+
+        <footer class="footer" aria-label="Footer">
+          <div class="container footer-inner">
+            <div>© <span id="year"></span> Azure Bay Grand Hotel • Hotel Management</div>
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

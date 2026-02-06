@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Management - Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a class="brand" href="index.html" aria-label="Home">
+          <div class="brand-badge" aria-hidden="true"></div>
+          <div>
+            <div class="brand-title">Hotel Management</div>
+            <div style="color: rgba(255,255,255,.56); font-size: 12px; margin-top: 1px;">Dashboard</div>
+          </div>
+        </a>
+
+        <nav class="navitems" aria-label="Primary">
+          <a class="navlink" data-nav="home" href="index.html">Home</a>
+          <a class="navlink" data-nav="mybookings" href="mybookings.html">MyBookings</a>
+          <span class="navgreet" id="userGreeting" aria-label="User greeting"></span>
+          <a class="navlink" id="logoutBtn" href="#">Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="container">
+        <section class="hero">
+          <div class="panel hero-left">
+            <div class="kicker">Welcome</div>
+            <h1 class="hotel-name">Azure Bay Grand Hotel</h1>
+            <p class="one-line">
+              A premium stay with elegant rooms, rooftop dining, and a calm seaside vibe — perfect for business or a relaxing getaway.
+            </p>
+
+            <div class="cta-row">
+              <button class="btn btn-primary" id="bookNowBtn" type="button">Book Now</button>
+              <a class="btn btn-secondary" href="mybookings.html">View MyBookings</a>
+            </div>
+
+            <div class="meta" aria-label="Highlights">
+              <div class="pill">Free Wi‑Fi</div>
+              <div class="pill">24/7 Front Desk</div>
+              <div class="pill">Restaurant & Pool</div>
+              <div class="pill">Prime Location</div>
+            </div>
+          </div>
+
+          <aside class="panel hero-right" aria-label="Hotel images">
+            <div class="gallery">
+              <div class="photo">
+                <img src="assets/img1.jpg" alt="Hotel exterior" />
+                <div class="caption">Exterior view</div>
+              </div>
+              <div class="photo">
+                <img src="assets/img2.jpg" alt="Hotel interior" />
+                <div class="caption">Interior view</div>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="panel section" aria-label="Rating">
+          <div class="rating-row">
+            <div>
+              <h2 class="section-title">Rating</h2>
+              <div class="stars" aria-label="4.7 out of 5">
+                <span class="rating-score">4.7</span>
+                <span aria-hidden="true">/</span>
+                <span class="rating-note">5.0</span>
+                <span style="width: 12px;"></span>
+                <span class="stars" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="currentColor" style="opacity:.55"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </span>
+              </div>
+              <div class="rating-note" style="margin-top: 6px;">Based on 2,148 verified guest reviews</div>
+            </div>
+
+            <div class="pill">Best Price Guarantee</div>
+          </div>
+        </section>
+
+        <section class="panel section" aria-label="Why choose us">
+          <h2 class="section-title">Why to choose us</h2>
+          <div class="cards">
+            <div class="card">
+              <h3 class="card-title">Clean & Comfortable</h3>
+              <p class="card-body">Daily housekeeping, fresh linens, and peaceful rooms designed for deep rest.</p>
+            </div>
+            <div class="card">
+              <h3 class="card-title">Great Location</h3>
+              <p class="card-body">Close to major spots, easy transport, and a safe neighborhood for families.</p>
+            </div>
+            <div class="card">
+              <h3 class="card-title">Top Amenities</h3>
+              <p class="card-body">Fast Wi‑Fi, pool access, rooftop dining, and on‑demand room service.</p>
+            </div>
+            <div class="card">
+              <h3 class="card-title">Friendly Support</h3>
+              <p class="card-body">24/7 front desk team ready to help with check‑in, requests, and local tips.</p>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer" aria-label="Footer">
+          <div class="container footer-inner">
+            <div>© <span id="year"></span> Azure Bay Grand Hotel • Hotel Management</div>
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+      const footerLogout = document.getElementById('logoutBtnFooter');
+      if (footerLogout) footerLogout.addEventListener('click', (e) => {
+        e.preventDefault();
+        const headerLogout = document.getElementById('logoutBtn');
+        if (headerLogout) headerLogout.click();
+      });
+    </script>
+  </body>
+</html>

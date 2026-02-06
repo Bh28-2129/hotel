@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Management - Book Now</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a class="brand" href="index.html" aria-label="Home">
+          <div class="brand-badge" aria-hidden="true"></div>
+          <div>
+            <div class="brand-title">Hotel Management</div>
+            <div style="color: rgba(255,255,255,.56); font-size: 12px; margin-top: 1px;">Book Now</div>
+          </div>
+        </a>
+
+        <nav class="navitems" aria-label="Primary">
+          <a class="navlink" data-nav="home" href="index.html">Home</a>
+          <a class="navlink" data-nav="mybookings" href="mybookings.html">MyBookings</a>
+          <span class="navgreet" id="userGreeting" aria-label="User greeting"></span>
+          <a class="navlink" id="logoutBtn" href="#">Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="container">
+        <section class="panel section" aria-label="Room selection">
+          <h1 class="section-title" style="margin-bottom: 6px;">Choose your room type</h1>
+          <div class="rating-note" style="margin-bottom: 14px;">Select a room type to view available rooms and book instantly.</div>
+
+          <div class="form-row">
+            <label class="field">
+              <span class="field-label">Room Type</span>
+              <select class="select" id="roomTypeSelect" aria-label="Room Type">
+                <option value="" selected disabled>Select a room type…</option>
+                <option value="single">Single</option>
+                <option value="double">Double</option>
+                <option value="deluxe">Deluxe</option>
+                <option value="suite">Suite</option>
+              </select>
+            </label>
+
+            <button class="btn btn-primary" id="showRoomsBtn" type="button">Book</button>
+          </div>
+
+          <div class="pill" style="margin-top: 12px;">Total rooms available: <b id="totalRooms">10</b></div>
+
+          <div id="roomsMount" style="margin-top: 14px;"></div>
+        </section>
+
+        <footer class="footer" aria-label="Footer">
+          <div class="container footer-inner">
+            <div>© <span id="year"></span> Azure Bay Grand Hotel • Hotel Management</div>
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Management - Sign Up</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a class="brand" href="signup.html" aria-label="Sign up">
+          <div class="brand-badge" aria-hidden="true"></div>
+          <div>
+            <div class="brand-title">Hotel Management</div>
+            <div style="color: rgba(255,255,255,.56); font-size: 12px; margin-top: 1px;">Sign up</div>
+          </div>
+        </a>
+
+        <nav class="navitems" aria-label="Primary">
+          <a class="navlink" href="login.html">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="container">
+        <section class="panel section" aria-label="Signup form" style="max-width: 560px; margin: 0 auto;">
+          <h1 class="section-title" style="margin-bottom: 6px;">Create your account</h1>
+          <div class="rating-note" style="margin-bottom: 14px;">Sign up to access the dashboard.</div>
+
+          <form id="signupForm">
+            <div class="grid-2">
+              <label class="field compact" style="min-width: auto;">
+                <span class="field-label">Full name</span>
+                <input class="input" id="signupName" autocomplete="name" placeholder="Your name" required />
+              </label>
+              <label class="field compact" style="min-width: auto;">
+                <span class="field-label">Email</span>
+                <input class="input" id="signupEmail" type="email" autocomplete="email" placeholder="you@example.com" required />
+              </label>
+            </div>
+
+            <div class="grid-2">
+              <label class="field compact" style="min-width: auto;">
+                <span class="field-label">Password</span>
+                <input class="input" id="signupPassword" type="password" autocomplete="new-password" placeholder="At least 4 characters" required />
+              </label>
+              <label class="field compact" style="min-width: auto;">
+                <span class="field-label">Confirm password</span>
+                <input class="input" id="signupConfirm" type="password" autocomplete="new-password" placeholder="Repeat password" required />
+              </label>
+            </div>
+
+            <div id="authMsg" class="notice" style="margin-top: 12px;"></div>
+
+            <div style="margin-top: 14px; display:flex; gap: 12px; flex-wrap: wrap;">
+              <button class="btn btn-primary" type="submit">Create account</button>
+              <a class="btn btn-secondary" href="login.html">Back to login</a>
+            </div>
+          </form>
+        </section>
+
+        <footer class="footer" aria-label="Footer">
+          <div class="container footer-inner">
+            <div>© <span id="year"></span> Azure Bay Grand Hotel • Hotel Management</div>
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

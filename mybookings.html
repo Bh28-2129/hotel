@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Management - MyBookings</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a class="brand" href="index.html" aria-label="Home">
+          <div class="brand-badge" aria-hidden="true"></div>
+          <div>
+            <div class="brand-title">Hotel Management</div>
+            <div style="color: rgba(255,255,255,.56); font-size: 12px; margin-top: 1px;">MyBookings</div>
+          </div>
+        </a>
+
+        <nav class="navitems" aria-label="Primary">
+          <a class="navlink" data-nav="home" href="index.html">Home</a>
+          <a class="navlink" data-nav="mybookings" href="mybookings.html">MyBookings</a>
+          <span class="navgreet" id="userGreeting" aria-label="User greeting"></span>
+          <a class="navlink" id="logoutBtn" href="#">Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="container">
+        <section class="panel section">
+          <h1 class="section-title" style="margin-bottom: 6px;">MyBookings</h1>
+          <div class="rating-note" style="margin-bottom: 14px;">Bookings are stored in MongoDB Atlas and loaded from the server.</div>
+          <div id="bookingsMount"></div>
+
+          <div style="margin-top: 14px; display:flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn btn-secondary" href="index.html">Back to Home</a>
+            <button class="btn" type="button" id="clearBtn">Clear bookings</button>
+          </div>
+        </section>
+
+        <footer class="footer" aria-label="Footer">
+          <div class="container footer-inner">
+            <div>© <span id="year"></span> Azure Bay Grand Hotel • Hotel Management</div>
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+      const clearBtn = document.getElementById('clearBtn');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', async () => {
+          const ok = confirm('This will delete ALL bookings from the database. Continue?');
+          if (!ok) return;
+          try {
+            const res = await fetch('/api/bookings', { method: 'DELETE' });
+            const data = await res.json().catch(() => null);
+            if (!res.ok) throw new Error((data && data.error) || `Request failed (${res.status})`);
+            location.reload();
+          } catch (err) {
+            alert(err && err.message ? err.message : 'Failed to clear bookings.');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
