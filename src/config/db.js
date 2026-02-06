@@ -41,4 +41,10 @@ async function connectDb(mongoUri) {
   }
 }
 
-module.exports = { connectDb };
+async function connectDbOnce(mongoUri) {
+  // readyState: 0=disconnected, 1=connected, 2=connecting, 3=disconnecting
+  if (mongoose.connection && mongoose.connection.readyState === 1) return;
+  await connectDb(mongoUri);
+}
+
+module.exports = { connectDb, connectDbOnce };
