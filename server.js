@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const { connectDb } = require('./src/config/db');
@@ -31,6 +32,20 @@ app.use(
 
 // API routes
 app.use('/api/health', healthRouter);
+
+function isDbReady() {
+  // readyState: 0=disconnected, 1=connected, 2=connecting, 3=disconnecting
+  return Boolean(mongoose.connection && mongoose.connection.readyState === 1);
+}
+
+// If DB is down, don't let API endpoints throw noisy errors.
+app.use('/api', (req, res, next) => {
+  // Health endpoint is mounted separately above.
+  if (isDbReady()) return next();
+  return res.status(503).json({
+    error: 'Database unavailable. Fix MONGODB_URI / Atlas network access, then restart the server.',
+  });
+});
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/rooms', roomsRouter);
 app.use('/api/auth', authRouter);
@@ -53,7 +68,16 @@ app.use((err, _req, res, _next) => {
 
 async function start() {
   const port = Number(process.env.PORT || 3000);
-  await connectDb(process.env.MONGODB_URI);
+  const allowNoDb = ['1', 'true', 'yes', 'on'].includes(String(process.env.ALLOW_NO_DB || '').trim().toLowerCase());
+  try {
+    await connectDb(process.env.MONGODB_URI);
+  } catch (err) {
+    if (!allowNoDb) throw err;
+    // eslint-disable-next-line no-console
+    console.warn('Starting without database connection because ALLOW_NO_DB is enabled.');
+    // eslint-disable-next-line no-console
+    console.warn(err && err.message ? err.message : err);
+  }
 
   // Ensure rooms collection exists (seed on first run)
   try {
